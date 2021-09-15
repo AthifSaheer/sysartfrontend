@@ -1,0 +1,33 @@
+.navbar__main {
+    background: #eeffff;
+    color: #009fa5;
+    font-weight: bold;
+    display: flex;
+}
+.comany_txt {
+    margin-left: 14px;
+}
+.middle_div {
+    width: 87%;
+}
+.logout_btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    align-items: center;
+}
+.logout_btn button {
+    background: #eeffff;
+    color: #009fa5;
+    border: 1px solid #009fa5;
+    font-weight: bold;
+    height: 35px;
+    padding: 6px;
+}
+.logout_btn button:hover {
+    background: #009fa5;
+    color: #eeffff;
+    border: 1px solid #eeffff;
+}

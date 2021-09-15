@@ -1,0 +1,20 @@
+.main_div {
+    display: flex;
+    margin-top: 19px;
+}
+.student_table_start {
+    width: 10%;
+}
+.student_table {
+    background: #ffffff;
+    width: 80%;
+    display: flex;
+}
+.student_table table {
+    border: 1px solid red;
+}
+.server_down_text_danger {
+    color:red;
+    font-size: 18px;
+    padding: 10px 0 0 20px;
+}
