@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import { useHistory, Link } from 'react-router-dom'
 import {reactLocalStorage} from 'reactjs-localstorage';
 import axios from 'axios';
 
 import './Login.css'
+import Home from '../Home/Home'
 
-function Login() {
+function Login(props) {
     const [email, setEmail] = useState('')
     const [emailRequired, setEmailRequired] = useState(false)
     const [mustBeEmail, setMustBeEmail] = useState(false)
@@ -19,7 +19,6 @@ function Login() {
     const [codeRequired, setCodeRequired] = useState(false)
     
     const [serverDown, setServerDown] = useState(false)
-    const history = useHistory()
 
 
     const loginBtn = () => {
@@ -56,7 +55,7 @@ function Login() {
         if (email && password && code && email.includes('@')) {
             let loginData = {'email': email, 'password': password, 'code': code};
             
-            axios.post('http://127.0.0.1:8000/login/', loginData)
+            axios.post('http://127.0.0.1:8000/api/v1/login/', loginData)
             .then((res) => {
                 console.log('-----------', res.data);
                 if (res.data['nouser']) {
@@ -64,7 +63,7 @@ function Login() {
                 } else {
                     reactLocalStorage.set('logintoken', res.data['key']);
                     reactLocalStorage.set('code', code);
-                    history.push('/')
+                    props.setComponent("home")
                 }
             } )
             .catch(error => setServerDown(true))
@@ -73,7 +72,7 @@ function Login() {
 
     useEffect(() => {
         if(reactLocalStorage.get('logintoken')) {
-            history.push('/')
+            props.setComponent("home")
         }
     }, [])
 
@@ -87,7 +86,6 @@ function Login() {
 
     return (
         <div>
-
             <div className="main-div">
                 <div>
                     <div className="login_container">
@@ -137,7 +135,7 @@ function Login() {
 
                             <label htmlFor="code">Choose Code:</label>
                             <select name="code" id="code" onChange={e => setCode(e.target.value)} className="input-error">
-                                <option value="">-----------</option>
+                                <option value="">-------</option>
                                 <option value="sysarta">A</option>
                                 <option value="sysartb">B</option>
                             </select>
@@ -159,13 +157,12 @@ function Login() {
 
                             <button onClick={loginBtn} type="submit" className="login-btn">Login</button>
                             
-                            <Link to='/register' ><p>or <span style={{ color: '#1890ff' }} > register now!</span></p></Link>
+                            <p className="or_log_signup_txt">or <span style={{ color: '#1890ff' }} onClick={() => props.setComponent("signup")} > register now!</span></p>
                         </div>
 
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

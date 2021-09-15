@@ -35,7 +35,7 @@ export default function DenseTable() {
 
     useEffect(() => {
         let code = reactLocalStorage.get('code')
-        axios.get(`http://127.0.0.1:8000/home/${code}/`)
+        axios.get(`http://127.0.0.1:8000/api/v1/home/${code}/`)
         .then((res) => {
             console.log('----Succes-------', res.data)
             setStudentData(res.data)
@@ -50,7 +50,7 @@ export default function DenseTable() {
     const classes = useStyles();
 
     return (
-        <div>
+        <div className="home_main_div">
             {serverDown? 
                 <p className="server_down_text_danger">Server Down !</p>
             :
@@ -58,6 +58,7 @@ export default function DenseTable() {
                     <div className="student_table_start"></div>
                     <div className="student_table">
 
+                        <p>STUDENTS</p>
                         <table style={{ width: '99%'}}>
                             <thead>
                                 <tr>

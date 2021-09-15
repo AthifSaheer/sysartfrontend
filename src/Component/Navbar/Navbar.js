@@ -5,13 +5,13 @@ import axios from 'axios'
 
 import './Navbar.css'
 
-function NavbarX() {
+function NavbarX(props) {
     const history = useHistory()
     
     function logoutFunc() {
         reactLocalStorage.remove('logintoken');
         reactLocalStorage.remove('code');
-        history.push('/login')
+        props.setComponent("login")
     }
 
     return (

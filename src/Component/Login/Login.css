@@ -2,7 +2,7 @@
     background: rgb(255, 255, 255);
     border: 3px solid #ffff;
     border-radius: 10px;
-    height: 400px;
+    height: auto;
     width: 50%;
     margin-left: 25%;
     margin-top: 115px;
@@ -23,7 +23,7 @@
     border: 1px solid #d9d9d9;
     border-radius: 6px;
     width: 100%;
-    min-width: 220px;
+    min-width: 50px;
     height: 6px;
     padding: 14px;
     font-size: 15px;
@@ -32,7 +32,7 @@
     border: 1px solid #d9d9d9;
     border-radius: 6px;
     width: 100%;
-    min-width: 220px;
+    min-width: 50px;
     height: 6px;
     padding: 14px;
     font-size: 15px;
@@ -42,17 +42,27 @@
     font-size: 12px;
 }
 .login-btn {
-    width: 100%;
-    min-width: 220px;
+    width: 105%;
+    min-width: 50px;
     margin-top: 10px;
-    background: #1890ff;
-    border: 2px solid #1890ff;
+    background: #009fa5;
+    border: 2px solid #009fa5;
     border-radius: 4px;
     height: 40px;
     color: white;
     font-size: 25px;
 }
 .login-btn:hover {
-    background: #0f88f8;
+    background: #007377;
     color: white;
+}
+#code {
+    background-color: white;
+    width: 37%;
+    margin-left: 9px;
+    border: 1px solid #d9d9d9;
+    border-radius: 3px;
+}
+.or_log_signup_txt {
+    cursor: pointer;
 }

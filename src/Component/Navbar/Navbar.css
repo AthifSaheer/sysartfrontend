@@ -3,12 +3,14 @@
     color: #009fa5;
     font-weight: bold;
     display: flex;
+    border-bottom: 3px solid #009fa5;
+    width: 100%;
 }
 .comany_txt {
     margin-left: 14px;
 }
 .middle_div {
-    width: 87%;
+    min-width: 87%;
 }
 .logout_btn {
     display: flex;

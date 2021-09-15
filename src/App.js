@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 import logo from './logo.svg';
 import './App.css';
@@ -8,13 +9,22 @@ import Home from './Component/Home/Home'
 import Signup from './Component/Signup/Signup'
 
 function App() {
+  const [component, setComponent] = useState("")
+
+  useEffect(() => {
+    setComponent(reactLocalStorage.get('component'))
+  }, [reactLocalStorage.get('component')])
+
   return (
     <div className="App">
-        <BrowserRouter>
-          <Route path='/' exact component={Home} />
-          <Route path='/login' exact component={Login} />
-          <Route path='/register' exact component={Signup} />
-        </BrowserRouter>
+      <Home />
+      {/* { reactLocalStorage.get('component') == "home"? 
+      :
+        reactLocalStorage.get('component') == "login"?
+          <Login />
+        :
+          <Signup />
+      } */}
     </div>
   );
 }

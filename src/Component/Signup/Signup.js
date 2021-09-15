@@ -5,6 +5,7 @@ import axios from 'axios';
 import {reactLocalStorage} from 'reactjs-localstorage';
 
 import '../Login/Login.css'
+import Login from '../Login/Login'
 
 const SignupSchema = Yup.object().shape({
     username: Yup.string()
@@ -22,7 +23,7 @@ const SignupSchema = Yup.object().shape({
     // email: Yup.string().email('Invalid email').required('Required'),
   });
 
-function Login() {
+function Signup(props) {
     const [email, setEmail] = useState('')
     const [emailRequired, setEmailRequired] = useState(false)
     const [mustBeEmail, setMustBeEmail] = useState(false)
@@ -43,29 +44,9 @@ function Login() {
 
     const [serverDown, setServerDown] = useState(false)
 
-    const [isValid, setIsValid] = useState(true)
-    const [invalidUnamePwrd, setInvalidUnamePwrd] = useState(false)
+    const [usernameAlreadyExists, setUsernameAlreadyExists] = useState(false)
 
     const history = useHistory()
-
-    const loginBtn = () => {
-        console.log('Login working')
-        if(email == '') {
-            setIsValid(true)
-        } else if(password == '') {
-            setIsValid(true)
-        }else {
-            // axios.post('http://127.0.0.1:8000/login', {username, password})
-            // .then(resp => {
-            //     if (resp.token == undefined) {
-            //         setInvalidUnamePwrd(true)
-            //     } else {
-            //         setToken('mytoken', resp.token)
-            //     }
-            // }) // console.log(resp)
-            // .catch(error => console.log(error))
-        }
-    }
 
     const registerBtn = () => {
         if(email == '' && password == '' && confirmPassword == '') {
@@ -123,11 +104,15 @@ function Login() {
         if (username && email && password && password && code && password == confirmPassword &&  email.includes('@')) {
             let signupData = {'username': username, 'email': email, 'password': password, 'code': code};
 
-            axios.post('http://127.0.0.1:8000/register/account/', signupData)
+            axios.post('http://127.0.0.1:8000/api/v1/register/account/', signupData)
             .then((res) => {
-                reactLocalStorage.set('logintoken', res.data['key']);
-                reactLocalStorage.set('code', code);
-                history.push('/')
+                if (res.data['already exist']) {
+                    setUsernameAlreadyExists(true)
+                } else {
+                    reactLocalStorage.set('logintoken', res.data['key']);
+                    reactLocalStorage.set('code', code);
+                    props.setComponent("home")
+                }
             } )
             .catch(error => setServerDown(true))
         }
@@ -136,7 +121,7 @@ function Login() {
 
     useEffect(() => {
         if(reactLocalStorage.get('logintoken')) {
-            history.push('/')
+            props.setComponent("home")
         }
     }, [])
 
@@ -217,8 +202,8 @@ function Login() {
                                 null
                             }
 
-                            {invalidUnamePwrd?
-                                <span className="text-danger">Invalid username or password!</span>
+                            {usernameAlreadyExists?
+                                <span className="text-danger">Username already exists!</span>
                                 :
                                 null
                             }
@@ -251,16 +236,15 @@ function Login() {
                             {/* Login/Register Button */}
                             <button onClick={registerBtn} type="submit" className="login-btn">Register</button>
 
-                            <Link to='/login' ><p>or <span style={{ color: '#1890ff'}}> login now!</span></p></Link>
+                            <p className="or_log_signup_txt">or <span style={{ color: '#1890ff'}} onClick={() => props.setComponent("login")}> login now!</span></p>
 
                         </div>
 
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }
 
-export default Login
+export default Signup
