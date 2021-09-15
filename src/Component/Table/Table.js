@@ -35,7 +35,7 @@ export default function DenseTable() {
 
     useEffect(() => {
         let code = reactLocalStorage.get('code')
-        axios.get(`http://127.0.0.1:8000/api/v1/home/${code}/`)
+        axios.get(`https://sysart.athifsaheer.online/api/v1/home/${code}/`)
         .then((res) => {
             console.log('----Succes-------', res.data)
             setStudentData(res.data)

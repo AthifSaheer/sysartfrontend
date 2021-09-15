@@ -5,6 +5,7 @@ import axios from 'axios';
 import './Login.css'
 import Home from '../Home/Home'
 
+axios.defaults.withCredentials = true;
 function Login(props) {
     const [email, setEmail] = useState('')
     const [emailRequired, setEmailRequired] = useState(false)
@@ -55,7 +56,7 @@ function Login(props) {
         if (email && password && code && email.includes('@')) {
             let loginData = {'email': email, 'password': password, 'code': code};
             
-            axios.post('http://127.0.0.1:8000/api/v1/login/', loginData)
+            axios.post('https://sysart.athifsaheer.online/api/v1/login/', loginData)
             .then((res) => {
                 console.log('-----------', res.data);
                 if (res.data['nouser']) {

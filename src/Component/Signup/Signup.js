@@ -104,7 +104,7 @@ function Signup(props) {
         if (username && email && password && password && code && password == confirmPassword &&  email.includes('@')) {
             let signupData = {'username': username, 'email': email, 'password': password, 'code': code};
 
-            axios.post('http://127.0.0.1:8000/api/v1/register/account/', signupData)
+            axios.post('https://sysart.athifsaheer.online/api/v1/register/account/', signupData)
             .then((res) => {
                 if (res.data['already exist']) {
                     setUsernameAlreadyExists(true)
